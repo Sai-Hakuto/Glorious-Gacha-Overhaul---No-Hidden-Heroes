@@ -12,7 +12,7 @@
     "tag": "1.0.10",
     "url": "https://github.com/Sai-Hakuto/Glorious-Gacha-Overhaul---No-Hidden-Heroes/releases/tag/1.0.10",
     "main_asset": "DragonSword_GGO_No_Hidden_Heroes_20260824.zip",
-    "main_sha256": "11B513801894BC3A09368598D8324BB07D75AB211806BB444ACE13AE16A75A4A",
+    "main_sha256": "E9D24B89B359F5355AA26F48318EFC3C262727085527FBC55460AE00C5C6C6CC",
     "guard_sha256": "6F24B3B50395CC828864DABA3827AFA5D9D409FF23F17F870005A22C1B170EE0",
     "installer_sha256": "2C9C2F4C2A9EE92CA0AC801A7281A739F88DC893C2C54DE3DF72148A7ABB912B"
   },
@@ -28,7 +28,7 @@
     "active_mod_residue": 0,
     "hierarchy_preserved": true,
     "clean_game_fixture_preserved": true,
-    "pak_sha256": "4BE41E95BAF28BB6604835B349068E8FD7769947ED0C90D952FAEB5AE3E49D6A"
+    "pak_sha256": "388D7BEBC1DB31EDFDA1B9455827DCE09E7FD9F51BBC9A6881D57510BA227377"
   },
   "remote_github_install_uninstall": {
     "status": "PASS",
@@ -38,6 +38,15 @@
     "files_moved_on_uninstall": 98,
     "active_mod_residue": 0,
     "clean_game_fixture_preserved": true
+  },
+  "client_server_shop_sync_fix": {
+    "status": "PASS",
+    "changed_pak_entries": 14,
+    "forbidden_client_goods": 0,
+    "forbidden_server_goods": 0,
+    "forbidden_client_banners": 0,
+    "forbidden_server_banners": 0,
+    "old_client_only_variant_rejected_by_negative_control": true
   },
   "kaspersky_scan": {
     "status": "PASS",
