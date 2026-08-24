@@ -2,11 +2,11 @@
   "status": "PASS",
   "source_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_release_v5_20260824\\payload\\DS\\Content\\Paks\\mods\\DS_GGO_RESTORATION_P.pak",
   "source_sha256": "E17041E126D5E307FED4C47145E0D0C7E998324D01FBE45E6A39E80B0DA4D392",
-  "output_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build\\DS_GGO_RESTORATION_P.pak",
-  "output_sha256": "4BE41E95BAF28BB6604835B349068E8FD7769947ED0C90D952FAEB5AE3E49D6A",
+  "output_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build_v2\\DS_GGO_RESTORATION_P.pak",
+  "output_sha256": "388D7BEBC1DB31EDFDA1B9455827DCE09E7FD9F51BBC9A6881D57510BA227377",
   "mount": "../../../DS/Content/",
   "entry_count": 3774,
-  "changed_entry_count": 7,
+  "changed_entry_count": 14,
   "changed_entries": [
     "Design/GameData/BMGoodsData_KOR.table",
     "Design/GameData/SummonGroupData.table",
@@ -14,7 +14,14 @@
     "Design/GameData/SummonGroupData_ASIA.table",
     "Design/GameData/SummonGroupData_EUROPE.table",
     "Design/GameData/SummonGroupData_KOR.table",
-    "Design/GameData/SummonItemData.table"
+    "Design/GameData/SummonItemData.table",
+    "__GeneratedGameData__/Server/XML/GameData/BMGoodsData_KOR.xml",
+    "__GeneratedGameData__/Server/XML/GameData/SummonGroupData.xml",
+    "__GeneratedGameData__/Server/XML/GameData/SummonGroupData_AMERICA.xml",
+    "__GeneratedGameData__/Server/XML/GameData/SummonGroupData_ASIA.xml",
+    "__GeneratedGameData__/Server/XML/GameData/SummonGroupData_EUROPE.xml",
+    "__GeneratedGameData__/Server/XML/GameData/SummonGroupData_KOR.xml",
+    "__GeneratedGameData__/Server/XML/GameData/SummonItemData.xml"
   ],
   "removed_goods_ids": [
     1000032,
@@ -25,6 +32,71 @@
     1000037,
     1000038
   ],
+  "removed_server_rows": {
+    "SummonGroupData.xml": [
+      "4010",
+      "4012",
+      "4013",
+      "4014",
+      "4015",
+      "4016",
+      "4017"
+    ],
+    "SummonGroupData_AMERICA.xml": [
+      "4010",
+      "4012",
+      "4013",
+      "4014",
+      "4015",
+      "4016",
+      "4017"
+    ],
+    "SummonGroupData_ASIA.xml": [
+      "4010",
+      "4012",
+      "4013",
+      "4014",
+      "4015",
+      "4016",
+      "4017"
+    ],
+    "SummonGroupData_EUROPE.xml": [
+      "4010",
+      "4012",
+      "4013",
+      "4014",
+      "4015",
+      "4016",
+      "4017"
+    ],
+    "SummonGroupData_KOR.xml": [
+      "4010",
+      "4012",
+      "4013",
+      "4014",
+      "4015",
+      "4016",
+      "4017"
+    ],
+    "SummonItemData.xml": [
+      "4010",
+      "4012",
+      "4013",
+      "4014",
+      "4015",
+      "4016",
+      "4017"
+    ],
+    "BMGoodsData_KOR.xml": [
+      "1000032",
+      "1000033",
+      "1000034",
+      "1000035",
+      "1000036",
+      "1000037",
+      "1000038"
+    ]
+  },
   "targets": {
     "Ryza CE": {
       "cid": 10017,
@@ -207,11 +279,11 @@
     }
   },
   "write_info": {
-    "path": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build\\DS_GGO_RESTORATION_P.pak",
+    "path": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build_v2\\DS_GGO_RESTORATION_P.pak",
     "mount": "../../../DS/Content/",
     "files": 3774,
-    "index_offset": 182321012,
+    "index_offset": 182280433,
     "index_size": 528314,
-    "total": 182849371
+    "total": 182808792
   }
 }

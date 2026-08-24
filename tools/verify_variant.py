@@ -8,12 +8,14 @@ import pathlib
 import sys
 
 from build_variant import (
-    EDITED_TABLES,
+    EDITED_ENTRIES,
     SUMMON_GROUP_TABLES,
+    SUMMON_GROUP_XML,
     TABLE_PREFIX,
     TARGETS,
     acquisition_map,
     decode_table,
+    server_row_ids,
 )
 
 
@@ -37,9 +39,9 @@ def main() -> int:
     if set(base_entries) != set(entries):
         raise RuntimeError("entry-set mismatch")
     changed = {path for path in entries if entries[path] != base_entries[path]}
-    if changed != EDITED_TABLES:
+    if changed != EDITED_ENTRIES:
         raise RuntimeError(
-            f"change boundary mismatch: changed={sorted(changed)}, expected={sorted(EDITED_TABLES)}"
+            f"change boundary mismatch: changed={sorted(changed)}, expected={sorted(EDITED_ENTRIES)}"
         )
 
     banners = {str(spec["banner"]) for spec in TARGETS.values()}
@@ -50,6 +52,29 @@ def main() -> int:
     leaked_groups = banners & set(decode_table(entries, "SummonItemData.table")["Data"])
     if leaked_groups:
         raise RuntimeError(f"SummonItemData: forbidden groups present: {sorted(leaked_groups)}")
+
+    for xml_name in SUMMON_GROUP_XML:
+        leaked = banners & set(server_row_ids(
+            entries, xml_name, "SummonGroupData", "ID",
+        ))
+        if leaked:
+            raise RuntimeError(f"{xml_name}: forbidden server banners present: {sorted(leaked)}")
+    leaked_server_groups = banners & set(server_row_ids(
+        entries, "SummonItemData.xml", "SummonItemData", "ItemGroupID",
+    ))
+    if leaked_server_groups:
+        raise RuntimeError(
+            f"SummonItemData.xml: forbidden server groups present: {sorted(leaked_server_groups)}"
+        )
+
+    target_goods = {str(goods_id) for goods_id in range(1000032, 1000039)}
+    leaked_server_goods = target_goods & set(server_row_ids(
+        entries, "BMGoodsData_KOR.xml", "BMGoodsData", "ID",
+    ))
+    if leaked_server_goods:
+        raise RuntimeError(
+            f"BMGoodsData_KOR.xml: forbidden server goods present: {sorted(leaked_server_goods)}"
+        )
 
     routes = acquisition_map(entries)
     leaked_routes = {
@@ -68,7 +93,7 @@ def main() -> int:
         f"|entries={len(entries)}"
         f"|changed={len(changed)}"
         f"|remaining_banners={normal_banner_count}"
-        "|forbidden_banners=0|forbidden_shop_routes=0"
+        "|forbidden_client_server_banners=0|forbidden_client_server_shop_routes=0"
     )
     return 0
 

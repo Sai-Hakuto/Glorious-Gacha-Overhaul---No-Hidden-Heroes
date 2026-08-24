@@ -8,6 +8,7 @@ import json
 import pathlib
 import sys
 from typing import Any
+import xml.etree.ElementTree as ET
 
 TARGETS = {
     "Ryza CE": {"cid": 10017, "banner": "4010", "item": 1111501},
@@ -19,6 +20,7 @@ TARGETS = {
     "Veronica": {"cid": 10019, "banner": "4017", "item": 1111702},
 }
 TABLE_PREFIX = "Design/GameData/"
+SERVER_PREFIX = "__GeneratedGameData__/Server/XML/GameData/"
 SUMMON_GROUP_TABLES = [
     "SummonGroupData.table",
     "SummonGroupData_AMERICA.table",
@@ -26,10 +28,14 @@ SUMMON_GROUP_TABLES = [
     "SummonGroupData_EUROPE.table",
     "SummonGroupData_KOR.table",
 ]
-EDITED_TABLES = {
+SUMMON_GROUP_XML = [name.removesuffix(".table") + ".xml" for name in SUMMON_GROUP_TABLES]
+EDITED_ENTRIES = {
     *(TABLE_PREFIX + name for name in SUMMON_GROUP_TABLES),
     TABLE_PREFIX + "SummonItemData.table",
     TABLE_PREFIX + "BMGoodsData_KOR.table",
+    *(SERVER_PREFIX + name for name in SUMMON_GROUP_XML),
+    SERVER_PREFIX + "SummonItemData.xml",
+    SERVER_PREFIX + "BMGoodsData_KOR.xml",
 }
 
 
@@ -51,6 +57,69 @@ def decode_table(entries: dict[str, bytes], name: str) -> dict[str, Any]:
 
 def encode_table(value: dict[str, Any]) -> bytes:
     return (json.dumps(value, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+
+
+def local_name(value: str) -> str:
+    return value.rsplit("}", 1)[-1]
+
+
+def server_row_ids(
+    entries: dict[str, bytes], name: str, element_name: str, attribute_name: str,
+) -> list[str]:
+    path = SERVER_PREFIX + name
+    try:
+        root = ET.fromstring(entries[path])
+    except KeyError as exc:
+        raise RuntimeError(f"missing server XML entry: {path}") from exc
+    except ET.ParseError as exc:
+        raise RuntimeError(f"invalid server XML: {path}: {exc}") from exc
+    result: list[str] = []
+    for child in root:
+        if local_name(child.tag) != element_name:
+            continue
+        attributes = {local_name(key): value for key, value in child.attrib.items()}
+        if attribute_name in attributes:
+            result.append(attributes[attribute_name])
+    return result
+
+
+def remove_server_rows(
+    entries: dict[str, bytes], name: str, element_name: str,
+    attribute_name: str, targets: set[str],
+) -> list[str]:
+    path = SERVER_PREFIX + name
+    before_ids = server_row_ids(entries, name, element_name, attribute_name)
+    counts = {target: before_ids.count(target) for target in targets}
+    bad_counts = {target: count for target, count in counts.items() if count != 1}
+    if bad_counts:
+        raise RuntimeError(f"{name}: expected exactly one server row per target: {bad_counts}")
+
+    tag_marker = f":{element_name} ".encode("ascii")
+    attribute_markers = {
+        target: f':{attribute_name}="{target}"'.encode("ascii") for target in targets
+    }
+    removed: list[str] = []
+    kept: list[bytes] = []
+    for line in entries[path].splitlines(keepends=True):
+        matched = [
+            target for target, marker in attribute_markers.items()
+            if tag_marker in line and marker in line
+        ]
+        if matched:
+            if len(matched) != 1:
+                raise RuntimeError(f"{name}: ambiguous target server row")
+            removed.append(matched[0])
+        else:
+            kept.append(line)
+    if sorted(removed, key=int) != sorted(targets, key=int):
+        raise RuntimeError(f"{name}: removed unexpected server rows: {removed}")
+    entries[path] = b"".join(kept)
+    ET.fromstring(entries[path])
+    remaining = set(server_row_ids(entries, name, element_name, attribute_name))
+    leaked = sorted(targets & remaining, key=int)
+    if leaked:
+        raise RuntimeError(f"{name}: target server rows remain: {leaked}")
+    return sorted(removed, key=int)
 
 
 def flatten_random_ids(reward_row: dict[str, Any]) -> set[int]:
@@ -164,6 +233,19 @@ def main() -> int:
         del goods_data[str(goods_id)]
     entries[TABLE_PREFIX + "BMGoodsData_KOR.table"] = encode_table(goods)
 
+    removed_server_rows: dict[str, list[str]] = {}
+    for xml_name in SUMMON_GROUP_XML:
+        removed_server_rows[xml_name] = remove_server_rows(
+            entries, xml_name, "SummonGroupData", "ID", banner_ids,
+        )
+    removed_server_rows["SummonItemData.xml"] = remove_server_rows(
+        entries, "SummonItemData.xml", "SummonItemData", "ItemGroupID", banner_ids,
+    )
+    goods_ids = {str(goods_id) for goods_id in target_goods}
+    removed_server_rows["BMGoodsData_KOR.xml"] = remove_server_rows(
+        entries, "BMGoodsData_KOR.xml", "BMGoodsData", "ID", goods_ids,
+    )
+
     output_pak.parent.mkdir(parents=True, exist_ok=True)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     write_info = ds_pakwrite.write_pak(
@@ -180,8 +262,8 @@ def main() -> int:
     changed = sorted(
         path for path in original if original[path] != rebuilt_entries[path]
     )
-    unexpected_changed = sorted(set(changed) - EDITED_TABLES)
-    unchanged_expected = sorted(EDITED_TABLES - set(changed))
+    unexpected_changed = sorted(set(changed) - EDITED_ENTRIES)
+    unchanged_expected = sorted(EDITED_ENTRIES - set(changed))
     if unexpected_changed or unchanged_expected:
         raise RuntimeError(
             f"change boundary failed: unexpected={unexpected_changed}, unchanged_expected={unchanged_expected}"
@@ -196,6 +278,29 @@ def main() -> int:
     leaked_groups = sorted(banner_ids & set(remaining_summon))
     if leaked_groups:
         raise RuntimeError(f"SummonItemData: target groups remain: {leaked_groups}")
+    for xml_name in SUMMON_GROUP_XML:
+        remaining = set(server_row_ids(
+            rebuilt_entries, xml_name, "SummonGroupData", "ID",
+        ))
+        leaked = sorted(banner_ids & remaining, key=int)
+        if leaked:
+            raise RuntimeError(f"{xml_name}: target server banners remain: {leaked}")
+    remaining_server_groups = set(server_row_ids(
+        rebuilt_entries, "SummonItemData.xml", "SummonItemData", "ItemGroupID",
+    ))
+    leaked_server_groups = sorted(banner_ids & remaining_server_groups, key=int)
+    if leaked_server_groups:
+        raise RuntimeError(
+            f"SummonItemData.xml: target server groups remain: {leaked_server_groups}"
+        )
+    remaining_server_goods = set(server_row_ids(
+        rebuilt_entries, "BMGoodsData_KOR.xml", "BMGoodsData", "ID",
+    ))
+    leaked_server_goods = sorted(goods_ids & remaining_server_goods, key=int)
+    if leaked_server_goods:
+        raise RuntimeError(
+            f"BMGoodsData_KOR.xml: target server goods remain: {leaked_server_goods}"
+        )
 
     after_routes = acquisition_map(rebuilt_entries)
     leaked_goods = {
@@ -225,6 +330,7 @@ def main() -> int:
         "changed_entry_count": len(changed),
         "changed_entries": changed,
         "removed_goods_ids": target_goods,
+        "removed_server_rows": removed_server_rows,
         "targets": target_report,
         "write_info": write_info,
     }
