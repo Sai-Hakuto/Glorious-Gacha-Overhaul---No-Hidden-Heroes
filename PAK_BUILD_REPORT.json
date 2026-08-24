@@ -2,8 +2,8 @@
   "status": "PASS",
   "source_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_release_v5_20260824\\payload\\DS\\Content\\Paks\\mods\\DS_GGO_RESTORATION_P.pak",
   "source_sha256": "E17041E126D5E307FED4C47145E0D0C7E998324D01FBE45E6A39E80B0DA4D392",
-  "output_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build_v2\\DS_GGO_RESTORATION_P.pak",
-  "output_sha256": "388D7BEBC1DB31EDFDA1B9455827DCE09E7FD9F51BBC9A6881D57510BA227377",
+  "output_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build_v3\\DS_GGO_RESTORATION_P.pak",
+  "output_sha256": "1F56E1382137046E2EE6C38F72ABD4698217923664BE046BE081789D35BA6472",
   "mount": "../../../DS/Content/",
   "entry_count": 3774,
   "changed_entry_count": 14,
@@ -24,6 +24,15 @@
     "__GeneratedGameData__/Server/XML/GameData/SummonItemData.xml"
   ],
   "removed_goods_ids": [
+    1000032,
+    1000033,
+    1000034,
+    1000035,
+    1000036,
+    1000037,
+    1000038
+  ],
+  "removed_wrapped_goods_ids": [
     1000032,
     1000033,
     1000034,
@@ -279,11 +288,11 @@
     }
   },
   "write_info": {
-    "path": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build_v2\\DS_GGO_RESTORATION_P.pak",
+    "path": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build_v3\\DS_GGO_RESTORATION_P.pak",
     "mount": "../../../DS/Content/",
     "files": 3774,
-    "index_offset": 182280433,
+    "index_offset": 182272780,
     "index_size": 528314,
-    "total": 182808792
+    "total": 182801139
   }
 }

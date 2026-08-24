@@ -163,6 +163,21 @@ def acquisition_map(entries: dict[str, bytes]) -> dict[int, dict[str, list[int]]
     return result
 
 
+def wrapped_goods_rows(table: dict[str, Any], subcategory_id: str = "1000") -> list[dict[str, Any]]:
+    """Return the client shop's duplicated category index for a subcategory."""
+    try:
+        rows = table["WrapData"][subcategory_id]["Data"]
+    except (KeyError, TypeError) as exc:
+        raise RuntimeError(
+            f"BMGoodsData_KOR.table: missing WrapData[{subcategory_id}].Data"
+        ) from exc
+    if not isinstance(rows, list) or not all(isinstance(row, dict) for row in rows):
+        raise RuntimeError(
+            f"BMGoodsData_KOR.table: invalid WrapData[{subcategory_id}].Data"
+        )
+    return rows
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--pakmerge-root", required=True)
@@ -224,13 +239,40 @@ def main() -> int:
     target_goods = sorted(
         {goods_id for route in before_routes.values() for goods_id in route["goods_ids"]}
     )
+    goods_ids = {str(goods_id) for goods_id in target_goods}
     goods = decode_table(entries, "BMGoodsData_KOR.table")
     goods_data = goods["Data"]
+    wrapped_goods = wrapped_goods_rows(goods)
     missing_goods = [str(goods_id) for goods_id in target_goods if str(goods_id) not in goods_data]
     if missing_goods:
         raise RuntimeError(f"expected target goods missing: {missing_goods}")
+    wrapped_by_id: dict[str, list[dict[str, Any]]] = {}
+    for row in wrapped_goods:
+        wrapped_by_id.setdefault(str(row.get("ID")), []).append(row)
+    bad_wrapped = {
+        str(goods_id): len(wrapped_by_id.get(str(goods_id), []))
+        for goods_id in target_goods
+        if len(wrapped_by_id.get(str(goods_id), [])) != 1
+    }
+    if bad_wrapped:
+        raise RuntimeError(
+            f"BMGoodsData_KOR.table: expected one wrapped row per target: {bad_wrapped}"
+        )
+    mismatched_wrapped = [
+        str(goods_id)
+        for goods_id in target_goods
+        if wrapped_by_id[str(goods_id)][0] != goods_data[str(goods_id)]
+    ]
+    if mismatched_wrapped:
+        raise RuntimeError(
+            "BMGoodsData_KOR.table: wrapped target rows differ from primary rows: "
+            f"{mismatched_wrapped}"
+        )
     for goods_id in target_goods:
         del goods_data[str(goods_id)]
+    goods["WrapData"]["1000"]["Data"] = [
+        row for row in wrapped_goods if str(row.get("ID")) not in goods_ids
+    ]
     entries[TABLE_PREFIX + "BMGoodsData_KOR.table"] = encode_table(goods)
 
     removed_server_rows: dict[str, list[str]] = {}
@@ -241,7 +283,6 @@ def main() -> int:
     removed_server_rows["SummonItemData.xml"] = remove_server_rows(
         entries, "SummonItemData.xml", "SummonItemData", "ItemGroupID", banner_ids,
     )
-    goods_ids = {str(goods_id) for goods_id in target_goods}
     removed_server_rows["BMGoodsData_KOR.xml"] = remove_server_rows(
         entries, "BMGoodsData_KOR.xml", "BMGoodsData", "ID", goods_ids,
     )
@@ -301,6 +342,16 @@ def main() -> int:
         raise RuntimeError(
             f"BMGoodsData_KOR.xml: target server goods remain: {leaked_server_goods}"
         )
+    rebuilt_goods = decode_table(rebuilt_entries, "BMGoodsData_KOR.table")
+    remaining_wrapped_goods = {
+        str(row.get("ID")) for row in wrapped_goods_rows(rebuilt_goods)
+    }
+    leaked_wrapped_goods = sorted(goods_ids & remaining_wrapped_goods, key=int)
+    if leaked_wrapped_goods:
+        raise RuntimeError(
+            "BMGoodsData_KOR.table: target wrapped shop rows remain: "
+            f"{leaked_wrapped_goods}"
+        )
 
     after_routes = acquisition_map(rebuilt_entries)
     leaked_goods = {
@@ -330,6 +381,7 @@ def main() -> int:
         "changed_entry_count": len(changed),
         "changed_entries": changed,
         "removed_goods_ids": target_goods,
+        "removed_wrapped_goods_ids": target_goods,
         "removed_server_rows": removed_server_rows,
         "targets": target_report,
         "write_info": write_info,

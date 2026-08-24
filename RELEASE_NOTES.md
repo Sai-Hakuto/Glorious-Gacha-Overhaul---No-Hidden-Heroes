@@ -7,7 +7,9 @@ Veronica, Logan, Jerome, Awakened Lute, Ysera, and Viola.
 
 - Removed seven pickup-banner rows from all five client and server regional summon tables.
 - Removed the corresponding seven client and server summon item groups.
-- Removed seven Fate Invitation shop goods from both client and server data.
+- Removed seven Fate Invitation shop goods from client primary data, the
+  duplicated client shop index, and server data, so no blank/crash-icon cards
+  remain in the Hero tab.
 - Kept character/combat/progression data so already-owned characters still work.
 - Kept the corrected Mail, Sword Pass, Rift, Control Panel, purchase-screen, and
   world-audio fixes from the current standard GGO release.

@@ -7,8 +7,9 @@ Target game version: **1.0.10**.
 
 ## Disabled acquisition
 
-The build removes pickup banners and Fate Invitation shop goods from both the
-client tables and the local server XML for:
+The build removes pickup banners and Fate Invitation shop goods from the client
+tables (including the duplicated `BMGoodsData.WrapData` shop index) and the
+local server XML for:
 
 - Ryza CE
 - Veronica

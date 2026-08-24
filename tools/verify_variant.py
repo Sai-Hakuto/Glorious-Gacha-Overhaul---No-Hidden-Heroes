@@ -16,6 +16,7 @@ from build_variant import (
     acquisition_map,
     decode_table,
     server_row_ids,
+    wrapped_goods_rows,
 )
 
 
@@ -68,6 +69,16 @@ def main() -> int:
         )
 
     target_goods = {str(goods_id) for goods_id in range(1000032, 1000039)}
+    client_goods = decode_table(entries, "BMGoodsData_KOR.table")
+    leaked_client_goods = target_goods & set(client_goods["Data"])
+    leaked_wrapped_goods = target_goods & {
+        str(row.get("ID")) for row in wrapped_goods_rows(client_goods)
+    }
+    if leaked_client_goods or leaked_wrapped_goods:
+        raise RuntimeError(
+            "BMGoodsData_KOR.table: forbidden shop goods remain: "
+            f"primary={sorted(leaked_client_goods)} wrapped={sorted(leaked_wrapped_goods)}"
+        )
     leaked_server_goods = target_goods & set(server_row_ids(
         entries, "BMGoodsData_KOR.xml", "BMGoodsData", "ID",
     ))
