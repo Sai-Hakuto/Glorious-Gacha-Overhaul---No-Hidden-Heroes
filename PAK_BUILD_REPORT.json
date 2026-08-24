@@ -1,0 +1,217 @@
+{
+  "status": "PASS",
+  "source_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_release_v5_20260824\\payload\\DS\\Content\\Paks\\mods\\DS_GGO_RESTORATION_P.pak",
+  "source_sha256": "E17041E126D5E307FED4C47145E0D0C7E998324D01FBE45E6A39E80B0DA4D392",
+  "output_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build\\DS_GGO_RESTORATION_P.pak",
+  "output_sha256": "4BE41E95BAF28BB6604835B349068E8FD7769947ED0C90D952FAEB5AE3E49D6A",
+  "mount": "../../../DS/Content/",
+  "entry_count": 3774,
+  "changed_entry_count": 7,
+  "changed_entries": [
+    "Design/GameData/BMGoodsData_KOR.table",
+    "Design/GameData/SummonGroupData.table",
+    "Design/GameData/SummonGroupData_AMERICA.table",
+    "Design/GameData/SummonGroupData_ASIA.table",
+    "Design/GameData/SummonGroupData_EUROPE.table",
+    "Design/GameData/SummonGroupData_KOR.table",
+    "Design/GameData/SummonItemData.table"
+  ],
+  "removed_goods_ids": [
+    1000032,
+    1000033,
+    1000034,
+    1000035,
+    1000036,
+    1000037,
+    1000038
+  ],
+  "targets": {
+    "Ryza CE": {
+      "cid": 10017,
+      "banner": "4010",
+      "item": 1111501,
+      "shop_route_before": {
+        "random_ids": [
+          50000160
+        ],
+        "reward_ids": [
+          5000016
+        ],
+        "goods_ids": [
+          1000035
+        ]
+      },
+      "shop_route_after": {
+        "random_ids": [
+          50000160
+        ],
+        "reward_ids": [
+          5000016
+        ],
+        "goods_ids": []
+      }
+    },
+    "Ysera": {
+      "cid": 10010,
+      "banner": "4012",
+      "item": 1110901,
+      "shop_route_before": {
+        "random_ids": [
+          50000140
+        ],
+        "reward_ids": [
+          5000014
+        ],
+        "goods_ids": [
+          1000033
+        ]
+      },
+      "shop_route_after": {
+        "random_ids": [
+          50000140
+        ],
+        "reward_ids": [
+          5000014
+        ],
+        "goods_ids": []
+      }
+    },
+    "Awakened Lute": {
+      "cid": 10026,
+      "banner": "4013",
+      "item": 1110103,
+      "shop_route_before": {
+        "random_ids": [
+          50000130
+        ],
+        "reward_ids": [
+          5000013
+        ],
+        "goods_ids": [
+          1000032
+        ]
+      },
+      "shop_route_after": {
+        "random_ids": [
+          50000130
+        ],
+        "reward_ids": [
+          5000013
+        ],
+        "goods_ids": []
+      }
+    },
+    "Viola": {
+      "cid": 10035,
+      "banner": "4014",
+      "item": 1113301,
+      "shop_route_before": {
+        "random_ids": [
+          50000150
+        ],
+        "reward_ids": [
+          5000015
+        ],
+        "goods_ids": [
+          1000034
+        ]
+      },
+      "shop_route_after": {
+        "random_ids": [
+          50000150
+        ],
+        "reward_ids": [
+          5000015
+        ],
+        "goods_ids": []
+      }
+    },
+    "Jerome": {
+      "cid": 10015,
+      "banner": "4015",
+      "item": 1111301,
+      "shop_route_before": {
+        "random_ids": [
+          50000170
+        ],
+        "reward_ids": [
+          5000017
+        ],
+        "goods_ids": [
+          1000036
+        ]
+      },
+      "shop_route_after": {
+        "random_ids": [
+          50000170
+        ],
+        "reward_ids": [
+          5000017
+        ],
+        "goods_ids": []
+      }
+    },
+    "Logan": {
+      "cid": 10033,
+      "banner": "4016",
+      "item": 1113101,
+      "shop_route_before": {
+        "random_ids": [
+          19099000,
+          50000180
+        ],
+        "reward_ids": [
+          1909900,
+          5000018
+        ],
+        "goods_ids": [
+          1000037
+        ]
+      },
+      "shop_route_after": {
+        "random_ids": [
+          19099000,
+          50000180
+        ],
+        "reward_ids": [
+          1909900,
+          5000018
+        ],
+        "goods_ids": []
+      }
+    },
+    "Veronica": {
+      "cid": 10019,
+      "banner": "4017",
+      "item": 1111702,
+      "shop_route_before": {
+        "random_ids": [
+          50000190
+        ],
+        "reward_ids": [
+          5000019
+        ],
+        "goods_ids": [
+          1000038
+        ]
+      },
+      "shop_route_after": {
+        "random_ids": [
+          50000190
+        ],
+        "reward_ids": [
+          5000019
+        ],
+        "goods_ids": []
+      }
+    }
+  },
+  "write_info": {
+    "path": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build\\DS_GGO_RESTORATION_P.pak",
+    "mount": "../../../DS/Content/",
+    "files": 3774,
+    "index_offset": 182321012,
+    "index_size": 528314,
+    "total": 182849371
+  }
+}
