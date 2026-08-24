@@ -18,5 +18,7 @@ Status: PASS
 - Embedded PAK verification after ZIP extraction: PASS
 - Negative controls: PASS; the verifier rejects both standard GGO and the old
   broken client-only variant that produced placeholder shop cards
+- In-place upgrade from the broken client-only variant: PASS; a subsequent
+  uninstall restores the original clean state with zero active mod residue
 
 The installed game on drive F was not modified during this build.

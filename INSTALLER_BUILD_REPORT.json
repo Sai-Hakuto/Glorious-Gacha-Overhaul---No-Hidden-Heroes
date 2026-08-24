@@ -48,6 +48,14 @@
     "forbidden_server_banners": 0,
     "old_client_only_variant_rejected_by_negative_control": true
   },
+  "in_place_upgrade_client_only_v1_to_server_sync_v2": {
+    "status": "PASS",
+    "pre_upgrade_pak_sha256": "4BE41E95BAF28BB6604835B349068E8FD7769947ED0C90D952FAEB5AE3E49D6A",
+    "post_upgrade_pak_sha256": "388D7BEBC1DB31EDFDA1B9455827DCE09E7FD9F51BBC9A6881D57510BA227377",
+    "files_verified": 97,
+    "subsequent_uninstall_active_mod_residue": 0,
+    "original_clean_fixture_preserved": true
+  },
   "kaspersky_scan": {
     "status": "PASS",
     "database_date": "2026-08-24T11:38:00+03:00",
