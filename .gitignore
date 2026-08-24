@@ -4,5 +4,6 @@ installer/build/
 installer/dist/
 installer/testing_tools/ggo_no_hidden_installer_tests_*/
 installer/testing_tools/packaged_acceptance/
+installer/testing_tools/kaspersky_scan.txt
 *.tmp
 *.log

@@ -37,4 +37,5 @@ restores files that existed before installation.
 
 ## Verification
 
-See [TEST_REPORT.md](TEST_REPORT.md) and [PAK_BUILD_REPORT.json](PAK_BUILD_REPORT.json).
+See [TEST_REPORT.md](TEST_REPORT.md), [PAK_BUILD_REPORT.json](PAK_BUILD_REPORT.json),
+and [INSTALLER_BUILD_REPORT.json](INSTALLER_BUILD_REPORT.json).

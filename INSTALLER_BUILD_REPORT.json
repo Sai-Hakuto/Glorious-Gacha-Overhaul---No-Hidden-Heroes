@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "artifact": "GGO_No_Hidden_Heroes_Installer.exe",
+  "version": "1.0.10.0",
+  "size": 11834059,
+  "sha256": "2C9C2F4C2A9EE92CA0AC801A7281A739F88DC893C2C54DE3DF72148A7ABB912B",
+  "publisher_metadata": "Sai Hakuto",
+  "authenticode": "NotSigned",
+  "upx": false,
+  "repository": "Sai-Hakuto/Glorious-Gacha-Overhaul---No-Hidden-Heroes",
+  "release": {
+    "tag": "1.0.10",
+    "url": "https://github.com/Sai-Hakuto/Glorious-Gacha-Overhaul---No-Hidden-Heroes/releases/tag/1.0.10",
+    "main_asset": "DragonSword_GGO_No_Hidden_Heroes_20260824.zip",
+    "main_sha256": "11B513801894BC3A09368598D8324BB07D75AB211806BB444ACE13AE16A75A4A",
+    "guard_sha256": "6F24B3B50395CC828864DABA3827AFA5D9D409FF23F17F870005A22C1B170EE0",
+    "installer_sha256": "2C9C2F4C2A9EE92CA0AC801A7281A739F88DC893C2C54DE3DF72148A7ABB912B"
+  },
+  "unit_tests": {
+    "status": "PASS",
+    "passed": 13,
+    "failed": 0
+  },
+  "packaged_install_uninstall": {
+    "status": "PASS",
+    "files_verified_on_install": 97,
+    "files_moved_on_uninstall": 98,
+    "active_mod_residue": 0,
+    "hierarchy_preserved": true,
+    "clean_game_fixture_preserved": true,
+    "pak_sha256": "4BE41E95BAF28BB6604835B349068E8FD7769947ED0C90D952FAEB5AE3E49D6A"
+  },
+  "remote_github_install_uninstall": {
+    "status": "PASS",
+    "release_check_only": "PASS",
+    "downloaded_from_public_release": true,
+    "files_verified_on_install": 97,
+    "files_moved_on_uninstall": 98,
+    "active_mod_residue": 0,
+    "clean_game_fixture_preserved": true
+  },
+  "kaspersky_scan": {
+    "status": "PASS",
+    "database_date": "2026-08-24T11:38:00+03:00",
+    "processed_objects": 1110,
+    "detected": 0,
+    "suspicions": 0,
+    "errors": 0
+  },
+  "game_drive_f_modified": false
+}
