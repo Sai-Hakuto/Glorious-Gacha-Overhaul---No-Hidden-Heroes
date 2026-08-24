@@ -23,6 +23,9 @@ Character, combat, progression, localization, soul-item, Mail, Sword Pass,
 Rift, Control Panel, and runtime data remain intact. A hidden hero already
 present in a save remains usable; this edition only removes acquisition routes.
 
+All 24 Karma products in the internal Karma shop cost 300 dismantling currency
+instead of 30, matching the current standard GGO economy.
+
 ## Installation
 
 1. Download `GGO_No_Hidden_Heroes_Installer.exe` from the latest release.

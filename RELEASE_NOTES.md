@@ -13,6 +13,8 @@ Veronica, Logan, Jerome, Awakened Lute, Ysera, and Viola.
 - Kept character/combat/progression data so already-owned characters still work.
 - Kept the corrected Mail, Sword Pass, Rift, Control Panel, purchase-screen, and
   world-audio fixes from the current standard GGO release.
+- Raised all 24 internal Karma shop prices from 30 to 300 dismantling currency
+  in client primary data, the client UI index, and server data.
 
 ## Installer
 

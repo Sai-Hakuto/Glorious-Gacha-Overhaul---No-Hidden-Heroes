@@ -2,8 +2,8 @@
 
 Status: PASS
 
-- Baseline: corrected GGO release PAK `E17041E126D5E307FED4C47145E0D0C7E998324D01FBE45E6A39E80B0DA4D392`
-- Variant PAK: `1F56E1382137046E2EE6C38F72ABD4698217923664BE046BE081789D35BA6472`
+- Baseline: corrected GGO release PAK `92BDF6ADA4B231639A59290A1DF324681D4F79C93316D81EDC9A69C292B576E0`
+- Variant PAK: `B9CFB7AC0DBC1D61DA2B4A88CB0C30B9D9A6A9949A74EF01BE56F818D68E4CF2`
 - PAK entries: 3,774
 - Changed PAK entries: exactly 14 expected client/server data files
 - Removed pickup banners: 7 targets across all 5 client and server locale tables
@@ -13,9 +13,10 @@ Status: PASS
 - Remaining normal banners: 20
 - Forbidden client/server banner routes after build: 0
 - Forbidden client/server shop routes after build: 0
+- Karma shop prices: 24/24 equal 300 in client `Data`, client `WrapData`, and server XML
 - All other PAK entries: byte-identical to baseline
 - ZIP files: 97
-- ZIP SHA-256: `D277C59218F0E1E1EE9A97C5B9C9F3C1A5C2ABF22678583B54D39369A0E19A59`
+- ZIP SHA-256: `D7116723448C6E975A6AD57AC14569D431D98A9914828B26446109EB07ABBA47`
 - ZIP round-trip hash comparison: PASS (97/97 files)
 - Embedded PAK verification after ZIP extraction: PASS
 - Negative controls: PASS; the verifier rejects v2 because all seven duplicated

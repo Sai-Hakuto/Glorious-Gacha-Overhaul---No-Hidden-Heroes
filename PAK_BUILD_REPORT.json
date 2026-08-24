@@ -1,9 +1,9 @@
 {
   "status": "PASS",
-  "source_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_release_v5_20260824\\payload\\DS\\Content\\Paks\\mods\\DS_GGO_RESTORATION_P.pak",
-  "source_sha256": "E17041E126D5E307FED4C47145E0D0C7E998324D01FBE45E6A39E80B0DA4D392",
-  "output_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build_v3\\DS_GGO_RESTORATION_P.pak",
-  "output_sha256": "1F56E1382137046E2EE6C38F72ABD4698217923664BE046BE081789D35BA6472",
+  "source_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\karma_shop_price_20260824\\standard_v1\\DS_GGO_RESTORATION_P.pak",
+  "source_sha256": "92BDF6ADA4B231639A59290A1DF324681D4F79C93316D81EDC9A69C292B576E0",
+  "output_pak": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\karma_shop_price_20260824\\no_hidden_v4\\DS_GGO_RESTORATION_P.pak",
+  "output_sha256": "B9CFB7AC0DBC1D61DA2B4A88CB0C30B9D9A6A9949A74EF01BE56F818D68E4CF2",
   "mount": "../../../DS/Content/",
   "entry_count": 3774,
   "changed_entry_count": 14,
@@ -288,11 +288,11 @@
     }
   },
   "write_info": {
-    "path": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\ggo_no_hidden_20260824\\build_v3\\DS_GGO_RESTORATION_P.pak",
+    "path": "C:\\Users\\Sai\\Documents\\Gaming\\testing_tools\\dragonsword\\karma_shop_price_20260824\\no_hidden_v4\\DS_GGO_RESTORATION_P.pak",
     "mount": "../../../DS/Content/",
     "files": 3774,
-    "index_offset": 182272780,
+    "index_offset": 182272852,
     "index_size": 528314,
-    "total": 182801139
+    "total": 182801211
   }
 }
